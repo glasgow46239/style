@@ -1,7 +1,12 @@
-/* Britain Elects style — generated from tokens.json by build.py. v1.0.0. Do not edit by hand. */
+/* Britain Elects style — generated from tokens.json by build.py. v1.1.0. Do not edit by hand. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500;700&display=swap');
+
 :root {
-  --be-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --be-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --be-font: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --be-font-mono: 'Roboto Mono', ui-monospace, Menlo, Consolas, monospace;
+  --be-font-figures: 'Roboto Mono', ui-monospace, Menlo, Consolas, monospace;
+  --be-heading-tracking: -0.02em;
+  --be-weight-semibold: 600;
   --be-weight-regular: 400;
   --be-weight-bold: 700;
   --be-lh-tight: 1.15;
@@ -189,9 +194,10 @@
 
 /* Opt-in base styles: add class="be" to <body> (or any wrapper). */
 .be{font-family:var(--be-font);font-size:var(--be-size-body);line-height:var(--be-lh-body);color:var(--be-ink);background:var(--be-bg);font-variant-numeric:tabular-nums lining-nums}
-.be h1,.be h2,.be h3{font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);margin:0 0 .5em}
+.be h1,.be h2,.be h3{font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);letter-spacing:var(--be-heading-tracking);margin:0 0 .5em}
 .be h1{font-size:var(--be-size-h1)}.be h2{font-size:var(--be-size-h2)}
-.be .be-display{font-size:var(--be-size-display);font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight)}
+.be .be-display{font-size:var(--be-size-display);font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);letter-spacing:var(--be-heading-tracking)}
+.be .be-figures,.be td.be-num{font-family:var(--be-font-figures);font-variant-numeric:tabular-nums}
 .be small,.be .be-small{font-size:var(--be-size-small)}
 .be .be-caption{font-size:var(--be-size-caption);color:var(--be-ink-muted)}
 .be .be-muted{color:var(--be-ink-secondary)}

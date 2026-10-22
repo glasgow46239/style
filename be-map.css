@@ -1,0 +1,143 @@
+/* Britain Elects map panels: results panel, history panel, tables, stacked bars and tiles.
+   Values come from Bobby's settings in the Map Panel Tuner (22 October 2026).
+   Link after be.css. Applies to the existing class names in le2026, learchive and
+   britainpredicts, scoped to #side-panel and #drawer so nothing else on the page changes.
+   Sizes are rem so they follow the reader's browser text size; hairlines and stripes stay px. */
+
+:root {
+  --bm-width: 18.125rem;            /* 290px */
+  --bm-pad: 0.75rem;                /* 12px on every inner edge */
+  --bm-radius: 5px;
+  --bm-row: 1.3125rem;              /* 21px table rows */
+  --bm-cell: 0.8125rem;             /* 13px names and figures */
+  --bm-label: 0.6875rem;            /* 11px labels and column headers */
+  --bm-label-colour: #767676;
+  --bm-head-rule: #CCCCCC;
+  --bm-row-rule: #F5F5F5;
+  --bm-stripe: 5px;
+  --bm-rule: 4px;                   /* coloured top rule */
+  --bm-prev-split: 20px;            /* how much of the top rule shows the previous winner */
+  --bm-first-col: 3.75rem;          /* history table party column, so the latest year can stick beside it */
+}
+
+:is(#side-panel, #drawer) {
+  font-family: var(--be-font);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--be-ink, #1A1A1A);
+}
+#side-panel { width: var(--bm-width); border: 0; border-radius: var(--bm-radius); overflow: hidden; }
+
+/* Figures: Roboto Mono */
+:is(#side-panel, #drawer) :is(.pct-cell, .chg-cell, .stat-value, .demo-value),
+:is(#side-panel, #drawer) .history-table td:not(:first-child),
+:is(#side-panel, #drawer) .history-table thead th:not(:first-child) {
+  font-family: var(--be-font-figures);
+}
+:is(#side-panel, #drawer) .demo-nat { font-family: var(--be-font); }
+
+/* ---------- Top rule in the winner's colour; on a gain the left end shows the previous winner ---------- */
+:is(#side-panel, #drawer).be-has-result::before {
+  content: ""; display: block; height: var(--bm-rule); flex-shrink: 0;
+  background: var(--be-win);
+}
+:is(#side-panel, #drawer).be-has-result.be-gain::before {
+  background: linear-gradient(90deg, var(--be-prev) 0 var(--bm-prev-split), var(--be-win) var(--bm-prev-split));
+}
+
+/* ---------- Result line: ■ GRN GAIN FROM ■ LAB ---------- */
+:is(#side-panel, #drawer) .result-bar { display: flex; height: auto; padding: 0.6rem var(--bm-pad) 0; }
+:is(#side-panel, #drawer) .result-bar-incumbent { display: none; }
+:is(#side-panel, #drawer) .result-bar-fill { background: none !important; padding: 0; flex: 1; min-width: 0; }
+:is(#side-panel, #drawer) .result-bar-text {
+  font-size: var(--bm-label); font-weight: var(--be-weight-semibold, 600); letter-spacing: 0;
+  text-transform: uppercase; color: var(--be-ink, #1A1A1A); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+:is(#side-panel, #drawer) .result-bar-text .be-sq { display: inline-block; width: 0.7em; height: 0.7em; margin-right: 0.3em; }
+:is(#side-panel, #drawer) .result-bar-text .be-gf { color: var(--bm-label-colour); font-weight: 400; }
+
+/* ---------- Header ---------- */
+:is(#side-panel, #drawer) .panel-header { padding: var(--bm-pad) var(--bm-pad) 0.6rem; border-bottom: 1px solid var(--bm-head-rule); }
+:is(#side-panel, #drawer) .result-bar + .panel-header { padding-top: 0.25rem; }
+:is(#side-panel, #drawer) :is(.ward-name, .con-name) {
+  font-size: 1rem; font-weight: 700; line-height: 1.2; letter-spacing: var(--be-heading-tracking, -0.02em); color: var(--be-ink, #1A1A1A);
+}
+:is(#side-panel, #drawer) :is(.council-name, .con-region) { font-size: 0.875rem; color: #767676; margin-top: 0.1875rem; }
+:is(#side-panel, #drawer) .panel-body { padding: var(--bm-pad); }
+
+/* ---------- Labels and column headers ---------- */
+:is(#side-panel, #drawer) :is(.stacked-label, .stat-label, .demo-label) {
+  font-size: var(--bm-label); font-weight: 400; text-transform: uppercase; letter-spacing: 0;
+  color: var(--bm-label-colour); margin-bottom: 0.3125rem;
+}
+
+/* ---------- Stacked bars: this election, last time beneath, white seams ---------- */
+/* Base layout, so the panel works without any project CSS */
+:is(#side-panel, #drawer) .stacked-bar { display: flex; width: 100%; overflow: hidden; }
+:is(#side-panel, #drawer) .stacked-bar > div { height: 100%; }
+:is(#side-panel, #drawer) .party-cell, :is(#side-panel, #drawer) .history-party-cell { display: flex; align-items: center; }
+:is(#side-panel, #drawer) .party-stripe, :is(#side-panel, #drawer) .history-swatch { flex-shrink: 0; display: inline-block; }
+:is(#side-panel, #drawer) .bar-track { overflow: hidden; }
+:is(#side-panel, #drawer) .bar-fill { height: 100%; }
+:is(#side-panel, #drawer) :is(.results-table, .history-table) :is(th, td) { border-bottom: 0; }
+:is(#side-panel, #drawer) .history-table-scroll { overflow-x: auto; }
+:is(#side-panel, #drawer) .history-table tbody td { text-align: right; white-space: nowrap; }
+:is(#side-panel, #drawer) .history-table :is(th, td):first-child { text-align: left; position: sticky; left: 0; background: #fff; z-index: 1; }
+:is(#side-panel, #drawer) .history-table thead th { text-align: right; white-space: nowrap; }
+:is(#side-panel, #drawer) :is(.stats-grid, .demo-grid) { display: grid; grid-template-columns: 1fr 1fr; gap: 0.375rem; }
+:is(#side-panel, #drawer) .demo-section .demo-grid { border: 0; margin-top: 0.375rem; padding: 0; }
+
+:is(#side-panel, #drawer) .stacked-section { margin-bottom: 0.75rem; }
+:is(#side-panel, #drawer) .stacked-bar { height: 0.9375rem; margin-bottom: 0.0625rem; border-radius: 0; }
+:is(#side-panel, #drawer) .stacked-bar.previous { height: 0.25rem; opacity: 1; margin-bottom: 0; }
+:is(#side-panel, #drawer) .stacked-bar > div + div { box-shadow: inset 1px 0 0 #fff; }
+
+/* ---------- Results table ---------- */
+:is(#side-panel, #drawer) .results-table { width: 100%; border-collapse: collapse; table-layout: auto; font-size: var(--bm-cell); }
+:is(#side-panel, #drawer) .results-table thead th {
+  font-size: var(--bm-label); font-weight: 400; text-transform: uppercase; letter-spacing: 0;
+  color: var(--bm-label-colour); padding: 0 0.1875rem 0.375rem; border-bottom: 0;
+}
+:is(#side-panel, #drawer) .results-table thead th:first-child { width: 1%; white-space: nowrap; padding: 0 0.625rem 0.375rem 0; text-align: left; }
+:is(#side-panel, #drawer) .results-table thead th:nth-child(2) { width: 2.5rem; text-align: right; }
+:is(#side-panel, #drawer) .results-table thead th:nth-child(4) { width: 3rem; text-align: right; }
+:is(#side-panel, #drawer) .results-table tbody tr { border-top: 1px solid var(--bm-row-rule); }
+:is(#side-panel, #drawer) .results-table tbody td { height: var(--bm-row); padding: 0 0.1875rem; vertical-align: middle; }
+:is(#side-panel, #drawer) .results-table tbody td:first-child { padding-left: 0; white-space: nowrap; }
+:is(#side-panel, #drawer) .party-stripe { width: var(--bm-stripe); height: var(--bm-row); }
+:is(#side-panel, #drawer) .party-name { font-size: var(--bm-cell); font-weight: 400; color: var(--be-ink, #1A1A1A); padding-left: 0.5rem; }
+:is(#side-panel, #drawer) .pct-cell { font-size: var(--bm-cell); font-weight: 400; color: var(--be-ink, #1A1A1A); text-align: right; }
+:is(#side-panel, #drawer) .bar-cell { padding: 0 0.25rem; }
+:is(#side-panel, #drawer) .bar-track { height: 1rem; background: #FFFFFF; border-radius: 0; }
+:is(#side-panel, #drawer) .bar-fill { border-radius: 0; }
+:is(#side-panel, #drawer) .chg-cell { font-size: var(--bm-cell); text-align: right; }
+:is(#side-panel, #drawer) .chg-pos { color: var(--be-positive-text, #2A6FB0); }
+:is(#side-panel, #drawer) .chg-neg { color: var(--be-negative-text, #B35A0E); }
+:is(#side-panel, #drawer) .chg-nil { color: #BBBBBB; }
+
+/* ---------- History table (learchive) ---------- */
+:is(#side-panel, #drawer) .history-table { border-collapse: collapse; font-size: var(--bm-cell); }
+:is(#side-panel, #drawer) .history-table thead th {
+  font-size: var(--bm-label); font-weight: 400; letter-spacing: 0; text-transform: uppercase;
+  color: var(--bm-label-colour); padding: 0 0.625rem 0.375rem; min-width: 0;
+}
+:is(#side-panel, #drawer) .history-table thead th:nth-child(2) { color: #111111; font-weight: 700; }
+:is(#side-panel, #drawer) .history-table tbody tr { border-top: 1px solid var(--bm-row-rule); }
+:is(#side-panel, #drawer) .history-table tbody td { height: var(--bm-row); padding: 0 0.625rem; font-size: var(--bm-cell); font-weight: 400; min-width: 0; }
+:is(#side-panel, #drawer) .history-table td[style*="font-weight"] { font-weight: 700 !important; }
+:is(#side-panel, #drawer) .history-table :is(th, td):first-child { width: var(--bm-first-col); min-width: var(--bm-first-col); max-width: var(--bm-first-col); padding-left: 0; }
+/* Latest year stays in view beside the party column */
+:is(#side-panel, #drawer) .history-table :is(th, td):nth-child(2) {
+  position: sticky; left: var(--bm-first-col); z-index: 1; background-color: #fff;
+  box-shadow: inset -1px 0 0 var(--bm-row-rule);
+}
+:is(#side-panel, #drawer) .history-party-cell { gap: 0.375rem; font-size: var(--bm-cell); }
+:is(#side-panel, #drawer) .history-swatch { width: var(--bm-stripe); height: var(--bm-row); }
+:is(#side-panel, #drawer) .history-null { color: #BBBBBB; }
+
+/* ---------- Stat and demographic tiles ---------- */
+:is(#side-panel, #drawer) :is(.stats-grid, .demo-section) { border-top: 1px solid var(--bm-head-rule); margin-top: 0.875rem; padding-top: 0.75rem; }
+:is(#side-panel, #drawer) :is(.stat-box, .demo-item) { background: #F8F8F7; border-radius: 5px; padding: 0.5rem 0.625rem; }
+:is(#side-panel, #drawer) :is(.stat-value, .demo-value) { font-size: 0.875rem; font-weight: 700; color: var(--be-ink, #1A1A1A); }
+:is(#side-panel, #drawer) .demo-nat { font-size: var(--bm-label); font-weight: 400; color: var(--bm-label-colour); }
+:is(#side-panel, #drawer) .demo-bar-track { height: 0.25rem; background: #E8E8E8; border-radius: 0; }
+:is(#side-panel, #drawer) .demo-bar-fill { background: #555555 !important; border-radius: 0; }

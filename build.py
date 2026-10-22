@@ -46,6 +46,9 @@ def css():
     base = [
         f"  --be-font: {ty['family']};",
         f"  --be-font-mono: {ty['familyMono']};",
+        f"  --be-font-figures: {ty['familyFigures']};",
+        f"  --be-heading-tracking: {ty['headingTracking']};",
+        f"  --be-weight-semibold: {ty['weights']['semibold']};",
         f"  --be-weight-regular: {ty['weights']['regular']};",
         f"  --be-weight-bold: {ty['weights']['bold']};",
         f"  --be-lh-tight: {ty['lineHeight']['tight']};",
@@ -67,6 +70,7 @@ def css():
     L, D, B = "\n".join(light), "\n".join(dark), "\n".join(base)
     return (
         HEADER
+        + f"@import url('{ty['fontImport']}');\n\n"
         + f":root {{\n{B}\n{L}\n}}\n\n"
         + "/* Dark: opt in with <html data-theme=\"dark\">, or data-theme=\"auto\" to follow the reader's system setting. */\n"
         + f":root[data-theme=\"dark\"] {{\n{D}\n}}\n"
@@ -74,9 +78,10 @@ def css():
         + "/* Opt-in base styles: add class=\"be\" to <body> (or any wrapper). */\n"
         + ".be{font-family:var(--be-font);font-size:var(--be-size-body);line-height:var(--be-lh-body);"
           "color:var(--be-ink);background:var(--be-bg);font-variant-numeric:tabular-nums lining-nums}\n"
-        + ".be h1,.be h2,.be h3{font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);margin:0 0 .5em}\n"
+        + ".be h1,.be h2,.be h3{font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);letter-spacing:var(--be-heading-tracking);margin:0 0 .5em}\n"
         + ".be h1{font-size:var(--be-size-h1)}.be h2{font-size:var(--be-size-h2)}\n"
-        + ".be .be-display{font-size:var(--be-size-display);font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight)}\n"
+        + ".be .be-display{font-size:var(--be-size-display);font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);letter-spacing:var(--be-heading-tracking)}\n"
+        + ".be .be-figures,.be td.be-num{font-family:var(--be-font-figures);font-variant-numeric:tabular-nums}\n"
         + ".be small,.be .be-small{font-size:var(--be-size-small)}\n"
         + ".be .be-caption{font-size:var(--be-size-caption);color:var(--be-ink-muted)}\n"
         + ".be .be-muted{color:var(--be-ink-secondary)}\n\n"
@@ -141,7 +146,37 @@ JS_RUNTIME = r"""
     neutral: function (name, opt) { return T.neutrals[isDark(opt) ? 'dark' : 'light'][name]; },
     logo: function (opt) { return T.logo[isDark(opt) ? 'dark' : 'light']; },
     font: T.type.family,
-    isDark: isDark
+    fontFigures: T.type.familyFigures,
+    isDark: isDark,
+    /**
+     * The result line used at the top of map panels:
+     * "■ GRN GAIN FROM ■ LAB" (or "■ GRN HOLD"), party names in their own text colours.
+     * Unknown parties fall back to the label you pass in `names`.
+     */
+    resultLine: function (win, prev, names) {
+      names = names || {};
+      function part(k) {
+        var label = BE.key(k) ? BE.name(k, 'short') : (names[k] || k);
+        return '<i class="be-sq" style="background:' + (BE.fill(k) || '#A9ACA8') + '"></i>' +
+          '<span class="be-party" style="color:' + (BE.text(k) || 'inherit') + '">' + label + '</span>';
+      }
+      var gain = prev && BE.key(prev) !== BE.key(win) && String(prev) !== String(win);
+      return part(win) + (gain ? ' <span class="be-gf">gain from</span> ' + part(prev) : ' <span class="be-gf">hold</span>');
+    },
+    /**
+     * Applies a result to a panel element: sets the top rule colours (--be-win / --be-prev),
+     * marks gains so the rule splits, and fills any .result-bar-text inside it.
+     * Pass prev = null when there is no previous result (the rule is then one colour, no text change).
+     */
+    setResult: function (el, win, prev, names) {
+      if (!el) return;
+      el.style.setProperty('--be-win', BE.fill(win) || '#A9ACA8');
+      el.style.setProperty('--be-prev', BE.fill(prev || win) || '#A9ACA8');
+      el.classList.add('be-has-result');
+      el.classList.toggle('be-gain', !!prev && BE.key(prev) !== BE.key(win) && String(prev) !== String(win));
+      var t = el.querySelector('.result-bar-text');
+      if (t && prev !== null && prev !== undefined) t.innerHTML = BE.resultLine(win, prev, names);
+    }
   };
   BE.color = BE.fill; BE.colors = BE.colours;
 

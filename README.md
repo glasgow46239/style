@@ -6,12 +6,13 @@ One source of truth for colours, type and chart rules across every Britain Elect
 
 ## The one rule
 
-Edit **`tokens.json`** only. On push, a GitHub Action runs `build.py`, which regenerates:
+Edit **`tokens.json`** for colours and type (and `be-map.css` for map panels). On push, a GitHub Action runs `build.py`, which regenerates:
 
 | File | Used by |
 |---|---|
 | `be.css` | CSS custom properties (`--be-lab`, `--be-lab-text`, `--be-font`…) plus `be-c-*` / `be-bg-*` classes |
-| `be.js`  | `window.BE` — `BE.fill('Lib Dem')`, `BE.text('ldem')`, `BE.name('grn','analysis')`, `BE.signal('negative')` |
+| `be.js`  | `window.BE` — `BE.setResult(panel, win, prev)`, `BE.fill('Lib Dem')`, `BE.text('ldem')`, `BE.name('grn','analysis')`, `BE.signal('negative')` |
+| `be-map.css` | Hand-written. Shared map results/history panels (le2026, learchive, Britain Predicts) |
 | `index.html` | The style guide page (reads `be.js`, so it always matches) |
 
 Python projects (benma) fetch `tokens.json` directly — see `brand.py` in that repo.

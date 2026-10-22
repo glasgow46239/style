@@ -7,6 +7,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="logo/mark.svg">
 <link rel="stylesheet" href="be.css">
+<link rel="stylesheet" href="be-map.css">
 <style>
 /* Layout: one 880px reading column, square edges, hairline section rules, house chart style shown live. */
 :root { --g-rule: var(--be-border); --g-code: var(--be-surface); --g-ink: var(--be-ink); --g-bg: var(--be-bg); color-scheme: light; }
@@ -17,7 +18,7 @@ body { margin: 0; background: var(--g-bg); color: var(--g-ink); }
 .wrap { max-width: 880px; margin: 0 auto; padding-block: 40px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 header { display: flex; gap: 20px; align-items: center; padding-bottom: 28px; border-bottom: 2px solid var(--be-baseline); }
 header img { width: 64px; height: 64px; flex: none; }
-header h1 { font-size: var(--be-size-display); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+header h1 { font-size: var(--be-size-display); margin: 0; letter-spacing: var(--be-heading-tracking); text-wrap: balance; }
 header p { margin: 4px 0 0; color: var(--be-ink-secondary); font-size: var(--be-size-small); }
 nav { display: flex; flex-wrap: wrap; gap: 4px 18px; padding: 14px 0; border-bottom: 1px solid var(--g-rule); font-size: var(--be-size-small); }
 nav a { color: var(--be-ink-secondary); text-decoration: none; }
@@ -54,6 +55,8 @@ pre { background: var(--g-code); padding: 14px 16px; margin: 0; overflow-x: auto
 .spec span:first-child { width: 120px; flex: none; color: var(--be-ink-muted); font-size: var(--be-size-small); font-family: var(--be-font-mono); }
 .pn { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 20px; }
 .pn .cell { border: 1px solid var(--g-rule); }
+.panel-demo { background: #E8E6E1; padding: 20px; margin: 0 0 20px; }
+.panel-demo #side-panel { background: #fff; color: #1A1A1A; max-width: 100%; }
 .k { font-family: var(--be-font-mono); font-size: 12px; color: var(--be-ink-secondary); }
 footer { padding-top: 24px; font-size: var(--be-size-small); color: var(--be-ink-muted); }
 @media (max-width: 560px) { header h1 { font-size: var(--be-size-h1); } header img { width: 48px; height: 48px; } }
@@ -71,7 +74,7 @@ footer { padding-top: 24px; font-size: var(--be-size-small); color: var(--be-ink
 </header>
 
 <nav aria-label="Sections">
-  <a href="#use">Using it</a><a href="#parties">Party colours</a><a href="#signal">Positive and negative</a><a href="#charts">Charts</a><a href="#type">Type</a><a href="#names">Party names</a><a href="#ui">Interface</a><a href="#logo">Logo</a><a href="#neutrals">Neutrals</a>
+  <a href="#use">Using it</a><a href="#parties">Party colours</a><a href="#signal">Positive and negative</a><a href="#charts">Charts</a><a href="#type">Type</a><a href="#names">Party names</a><a href="#ui">Interface</a><a href="#panels">Map panels</a><a href="#logo">Logo</a><a href="#neutrals">Neutrals</a>
 </nav>
 
 <section id="use">
@@ -147,19 +150,21 @@ party_colour("Reform")   # '#15B6C2'</pre><button type="button" data-copy="s4">C
 
 <section id="type">
   <h2>Type</h2>
-  <p class="lede">Helvetica throughout, falling back to Arial. Two weights only: 400 and 700. No web font to load.</p>
+  <p class="lede">IBM Plex Sans for words; Roboto Mono for figures in tables, tiles and history tables. Both are free from Google Fonts and <code>be.css</code> loads them for you. Headings are bold (700) with -0.02em letter-spacing.</p>
   <div class="spec" id="spec">
-    <div><span>display 32</span><span style="font-size:var(--be-size-display);font-weight:700;line-height:1.15">Reform lead narrows to four</span></div>
-    <div><span>h1 24</span><span style="font-size:var(--be-size-h1);font-weight:700">What do the polls say?</span></div>
-    <div><span>h2 18</span><span style="font-size:var(--be-size-h2);font-weight:700">Westminster voting intention</span></div>
+    <div><span>display 32</span><span style="font-size:var(--be-size-display);font-weight:700;line-height:1.15;letter-spacing:var(--be-heading-tracking)">Reform lead narrows to four</span></div>
+    <div><span>h1 24</span><span style="font-size:var(--be-size-h1);font-weight:700;letter-spacing:var(--be-heading-tracking)">What do the polls say?</span></div>
+    <div><span>h2 18</span><span style="font-size:var(--be-size-h2);font-weight:700;letter-spacing:var(--be-heading-tracking)">Westminster voting intention</span></div>
     <div><span>body 16</span><span>Labour have fallen three points since the conference.</span></div>
     <div><span>small 13</span><span style="font-size:var(--be-size-small)">Fieldwork 14–16 October. Sample 2,031 GB adults.</span></div>
+    <div><span>figures</span><span style="font-family:var(--be-font-figures)">69.9  20.6  +34.1  −2.3  31.4%</span></div>
     <div><span>caption 11</span><span style="font-size:var(--be-size-caption);color:var(--be-ink-muted)">Source: Britain Elects poll aggregate. Smallest text allowed.</span></div>
   </div>
   <ul class="rules">
     <li>Nothing below 11px.</li>
     <li>Headlines in sentence case.</li>
-    <li>Monospace only for code and raw data views, never in published charts.</li>
+    <li>Weights: 400 for text, 600 only for the small capitals of a result line, 700 for headings and key figures.</li>
+    <li>Roboto Mono for figures that sit in columns (tables, tiles). Figures inside running text stay in Plex Sans.</li>
   </ul>
 </section>
 
@@ -175,12 +180,45 @@ party_colour("Reform")   # '#15B6C2'</pre><button type="button" data-copy="s4">C
 <section id="ui">
   <h2>Interface</h2>
   <ul class="rules">
-    <li>Square or near-square corners. No heavily rounded pills or boxes.</li>
+    <li>Corners: 5px on panels and tiles, square everywhere else. No pills.</li>
     <li>Use a dropdown, not a row of pills, once there are more than four or five options.</li>
     <li>Minimal chrome: hairline borders in the border colour, no shadows, no gradients.</li>
     <li>Party colour carries identity; interface text stays in the ink colours.</li>
   </ul>
 </section>
+
+<section id="panels">
+  <h2>Map panels</h2>
+  <p class="lede">One stylesheet, <code>be-map.css</code>, styles the results and history panels on every map (le2026, learchive, Britain Predicts). Link it after <code>be.css</code>; it applies to the existing panel markup. The settings come from the map panel tuner.</p>
+  <div class="snip"><pre id="s5">&lt;link rel="stylesheet" href="https://glasgow46239.github.io/style/be-map.css"&gt;
+
+// after drawing a result:
+BE.setResult(document.getElementById('side-panel'), 'grn', 'lab');  // gain: split top rule + "■ GRN GAIN FROM ■ LAB"
+BE.setResult(panel, 'grn', null);                                    // history panels: top rule only</pre><button type="button" data-copy="s5">Copy</button></div>
+  <div class="panel-demo">
+    <div id="side-panel">
+      <div class="result-bar"><div class="result-bar-incumbent"></div><div class="result-bar-fill"><span class="result-bar-text"></span></div></div>
+      <div class="panel-header"><div class="ward-name">Headingley and Hyde Park</div><div class="council-name">Leeds · example</div></div>
+      <div class="panel-body">
+        <div class="stacked-section"><div class="stacked-label">Result vs. prev</div><div class="stacked-bar" id="demo-now"></div><div class="stacked-bar previous" id="demo-prev"></div></div>
+        <table class="results-table"><thead><tr><th>Party</th><th>Pct.</th><th></th><th>Chg.</th></tr></thead><tbody id="demo-rows"></tbody></table>
+      </div>
+    </div>
+  </div>
+  <ul class="rules">
+    <li>Panel 290px wide (in rem), 12px inner padding, 5px corners, no shadow.</li>
+    <li>A 4px rule in the winner's colour runs across the top. On a gain, its left 20px takes the previous winner's colour.</li>
+    <li>Result line: 11px semibold capitals, short party names, each with its colour square and text colour; "gain from" and "hold" in grey.</li>
+    <li>Ward or seat name 16px bold, -0.02em; council or region 14px grey; 1px #CCCCCC rule beneath.</li>
+    <li>Labels and column headers 11px capitals in #767676, no letter-spacing.</li>
+    <li>Stacked bars: 15px this election, 4px last time, 1px apart, full opacity, white seams between parties.</li>
+    <li>Tables: 21px rows, 13px text, 5px party stripes, party column fitted to the longest name, faint #F5F5F5 row dividers, no rule under the headers.</li>
+    <li>History tables: the latest year is bold and stays in view beside the party column while earlier years scroll; each year's winner is bold on a 30% tint of its colour.</li>
+    <li>Tiles: #F8F8F7, 5px corners, 14px bold figures, one dark grey bar colour.</li>
+    <li>All sizes are rem, so panels grow with the reader's browser text size. Hairlines and stripes stay in px.</li>
+  </ul>
+</section>
+
 
 <section id="logo">
   <h2>Logo</h2>
@@ -275,6 +313,18 @@ party_colour("Reform")   # '#15B6C2'</pre><button type="button" data-copy="s4">C
     document.getElementById('demo').innerHTML = o;
     var m = document.getElementById('hdr-mark'); if (m) m.src = BE.isDark() ? 'logo/mark-dark.svg' : 'logo/mark.svg';
   }
+  (function () {
+    var rows = [['grn', 69.9, 34.1], ['lab', 20.6, -34.6], ['ref', 3.6, 3.6], ['ldem', 2.2, -2.3], ['oth', 2.0, 2.0], ['con', 1.6, -2.0]];
+    var prev = [['grn', 35.8], ['lab', 55.2], ['ind', 0.9], ['con', 3.6], ['ldem', 4.5]];
+    function seg(list) { var t = list.reduce(function (a, r) { return a + r[1]; }, 0); return list.map(function (r) { return '<div style="height:100%;width:' + (r[1] / t * 100).toFixed(2) + '%;background:' + BE.fill(r[0], { dark: false }) + '"></div>'; }).join(''); }
+    document.getElementById('demo-now').innerHTML = seg(rows);
+    document.getElementById('demo-prev').innerHTML = seg(prev);
+    document.getElementById('demo-rows').innerHTML = rows.map(function (r) {
+      var c = BE.fill(r[0], { dark: false });
+      return '<tr><td><div class="party-cell"><div class="party-stripe" style="background:' + c + '"></div><span class="party-name">' + BE.name(r[0]) + '</span></div></td><td class="pct-cell">' + r[1].toFixed(1) + '</td><td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="height:100%;width:' + (r[1] / 69.9 * 100).toFixed(1) + '%;background:' + c + '"></div></div></td><td class="chg-cell ' + (r[2] > 0 ? 'chg-pos' : 'chg-neg') + '">' + (r[2] > 0 ? '+' : '−') + Math.abs(r[2]).toFixed(1) + '</td></tr>';
+    }).join('');
+    BE.setResult(document.getElementById('side-panel'), 'grn', 'lab');
+  })();
   chart();
   if (window.matchMedia) { var mq = matchMedia('(prefers-color-scheme: dark)'); (mq.addEventListener ? mq.addEventListener('change', chart) : mq.addListener(chart)); }
   new MutationObserver(chart).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
