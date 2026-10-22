@@ -1,4 +1,4 @@
-/* Britain Elects style — generated from tokens.json by build.py. v1.1.0. Do not edit by hand. */
+/* Britain Elects style — generated from tokens.json by build.py. v1.2.0. Do not edit by hand. */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500;700&display=swap');
 
 :root {
@@ -19,7 +19,8 @@
   --be-size-caption: 0.6875rem;
   --be-line-width: 2.5px;
   --be-halo-width: 3px;
-  --be-radius: 0px;
+  --be-radius: 5px;
+  --be-radius-mark: 0px;
   --be-con: #05718F;
   --be-con-text: #05718F;
   --be-lab: #CF4545;

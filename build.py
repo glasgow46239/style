@@ -58,7 +58,8 @@ def css():
     base += [
         f"  --be-line-width: {ch['lineWidth']}px;",
         f"  --be-halo-width: {ch['haloWidth']}px;",
-        f"  --be-radius: {ch['radius']}px;",
+        f"  --be-radius: {T['ui']['radius']}px;",
+        f"  --be-radius-mark: {T['ui']['radiusMark']}px;",
     ]
 
     keys = list(allp) + list(clean(T["signal"]))

@@ -42,7 +42,7 @@ td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--be-grid); vertical-
 code, pre { font-family: var(--be-font-mono); font-size: 12.5px; }
 pre { background: var(--g-code); padding: 14px 16px; margin: 0; overflow-x: auto; line-height: 1.55; border: 1px solid var(--g-rule); }
 .snip { position: relative; margin: 0 0 16px; }
-.snip button { position: absolute; top: 8px; right: 8px; font: inherit; font-size: 12px; padding: 4px 10px; border: 1px solid var(--g-rule); background: var(--be-bg); color: var(--g-ink); cursor: pointer; border-radius: 0; }
+.snip button { position: absolute; top: 8px; right: 8px; font: inherit; font-size: 12px; padding: 4px 10px; border: 1px solid var(--g-rule); background: var(--be-bg); color: var(--g-ink); cursor: pointer; border-radius: var(--be-radius); }
 .snip button:focus-visible, nav a:focus-visible { outline: 2px solid var(--be-con-text); outline-offset: 2px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 20px; }
 .tile { border: 1px solid var(--g-rule); padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
@@ -55,6 +55,7 @@ pre { background: var(--g-code); padding: 14px 16px; margin: 0; overflow-x: auto
 .spec span:first-child { width: 120px; flex: none; color: var(--be-ink-muted); font-size: var(--be-size-small); font-family: var(--be-font-mono); }
 .pn { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 20px; }
 .pn .cell { border: 1px solid var(--g-rule); }
+.layouts figure { margin: 0; } .layouts svg { width: 100%; height: auto; display: block; } .layouts figcaption { font-size: var(--be-size-small); line-height: 1.4; }
 .panel-demo { background: #E8E6E1; padding: 20px; margin: 0 0 20px; }
 .panel-demo #side-panel { background: #fff; color: #1A1A1A; max-width: 100%; }
 .k { font-family: var(--be-font-mono); font-size: 12px; color: var(--be-ink-secondary); }
@@ -180,7 +181,9 @@ party_colour("Reform")   # '#15B6C2'</pre><button type="button" data-copy="s4">C
 <section id="ui">
   <h2>Interface</h2>
   <ul class="rules">
-    <li>Corners: 5px on panels and tiles, square everywhere else. No pills.</li>
+    <li>Corners: one radius, 5px (<code>--be-radius</code>), for anything with a corner: buttons, inputs, selects, segmented controls, panels, tiles, legends, dropdowns, drawers. No pills or fully rounded buttons.</li>
+    <li>Data marks stay square (<code>--be-radius-mark</code>, 0): bars, stripes, swatches, legend squares. Switches use a 5px track with a 3px knob.</li>
+    <li>Active state is ink (#1A1A1A) with white text; hover is #F5F5F5; borders are 1px #CCCCCC.</li>
     <li>Use a dropdown, not a row of pills, once there are more than four or five options.</li>
     <li>Minimal chrome: hairline borders in the border colour, no shadows, no gradients.</li>
     <li>Party colour carries identity; interface text stays in the ink colours.</li>
@@ -205,8 +208,16 @@ BE.setResult(panel, 'grn', null);                                    // history 
       </div>
     </div>
   </div>
+
+  <h3>Where the panel sits</h3>
+  <p class="lede">Set one attribute on the map container. Narrow screens always use the bottom drawer, which carries the same top rule and result line.</p>
+  <div class="grid layouts">
+    <figure class="tile on-light"><svg viewBox="0 0 160 100" role="img" aria-label="Float: full-width map with the panel as a card in the top right"><rect width="160" height="100" fill="#E8E6E1"/><rect x="104" y="6" width="50" height="46" rx="2" fill="#fff" stroke="#CCCCCC"/><rect x="104" y="6" width="50" height="3" fill="#62B65A"/><rect x="104" y="6" width="8" height="3" fill="#CF4545"/></svg><figcaption><b>Float</b> <code>data-be-layout="float"</code><br><small>Results maps: le2026, Britain Predicts. The map keeps its full width; the card appears on the first hover.</small></figcaption></figure>
+    <figure class="tile on-light"><svg viewBox="0 0 160 100" role="img" aria-label="Sidebar: map beside a docked panel on the right"><rect width="160" height="100" fill="#E8E6E1"/><rect x="112" y="0" width="48" height="100" fill="#fff" stroke="#CCCCCC"/><rect x="112" y="0" width="48" height="3" fill="#62B65A"/></svg><figcaption><b>Sidebar</b> <code>data-be-layout="sidebar"</code><br><small>290px, full height, docked right. For panels that are read rather than glanced at.</small></figcaption></figure>
+    <figure class="tile on-light"><svg viewBox="0 0 160 100" role="img" aria-label="Wide sidebar: map beside a wider docked panel"><rect width="160" height="100" fill="#E8E6E1"/><rect x="100" y="0" width="60" height="100" fill="#fff" stroke="#CCCCCC"/><rect x="100" y="0" width="60" height="3" fill="#62B65A"/></svg><figcaption><b>Wide sidebar</b> <code>data-be-width="wide"</code><br><small>360px. learchive, so more years of history fit before the table scrolls.</small></figcaption></figure>
+  </div>
   <ul class="rules">
-    <li>Panel 290px wide (in rem), 12px inner padding, 5px corners, no shadow.</li>
+    <li>Panel 290px wide (in rem), 12px inner padding, 5px corners; floating cards get a soft shadow, sidebars a hairline on the map side.</li>
     <li>A 4px rule in the winner's colour runs across the top. On a gain, its left 20px takes the previous winner's colour.</li>
     <li>Result line: 11px semibold capitals, short party names, each with its colour square and text colour; "gain from" and "hold" in grey.</li>
     <li>Ward or seat name 16px bold, -0.02em; council or region 14px grey; 1px #CCCCCC rule beneath.</li>
