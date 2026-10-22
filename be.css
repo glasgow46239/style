@@ -1,0 +1,238 @@
+/* Britain Elects style — generated from tokens.json by build.py. v1.0.0. Do not edit by hand. */
+:root {
+  --be-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --be-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --be-weight-regular: 400;
+  --be-weight-bold: 700;
+  --be-lh-tight: 1.15;
+  --be-lh-body: 1.5;
+  --be-size-display: 2rem;
+  --be-size-h1: 1.5rem;
+  --be-size-h2: 1.125rem;
+  --be-size-body: 1rem;
+  --be-size-small: 0.8125rem;
+  --be-size-caption: 0.6875rem;
+  --be-line-width: 2.5px;
+  --be-halo-width: 3px;
+  --be-radius: 0px;
+  --be-con: #05718F;
+  --be-con-text: #05718F;
+  --be-lab: #CF4545;
+  --be-lab-text: #CF4545;
+  --be-ldem: #FAA61A;
+  --be-ldem-text: #9C6B25;
+  --be-ref: #15B6C2;
+  --be-ref-text: #298088;
+  --be-grn: #62B65A;
+  --be-grn-text: #4C8145;
+  --be-snp: #F1EC3C;
+  --be-snp-text: #7C773A;
+  --be-pc: #2F7865;
+  --be-pc-text: #2F7865;
+  --be-rst: #485255;
+  --be-rst-text: #485255;
+  --be-oth: #A9ACA8;
+  --be-oth-text: #737573;
+  --be-ind: #7E817D;
+  --be-ind-text: #6B6E6A;
+  --be-ukip: #6D3177;
+  --be-ukip-text: #6D3177;
+  --be-alba: #005EB8;
+  --be-alba-text: #005EB8;
+  --be-dup: #B5442E;
+  --be-dup-text: #B5442E;
+  --be-sf: #326760;
+  --be-sf-text: #326760;
+  --be-sdlp: #2AA82C;
+  --be-sdlp-text: #227F24;
+  --be-uup: #48A5EE;
+  --be-uup-text: #2A6FA8;
+  --be-apni: #F6CB2F;
+  --be-apni-text: #7F6A1C;
+  --be-positive: #2A6FB0;
+  --be-positive-text: #2A6FB0;
+  --be-negative: #E07A1F;
+  --be-negative-text: #B35A0E;
+  --be-neutral: #A9ACA8;
+  --be-neutral-text: #737573;
+  --be-bg: #FFFFFF;
+  --be-surface: #F5F5F5;
+  --be-border: #DDDDDD;
+  --be-ink: #1A1A1A;
+  --be-ink-secondary: #555555;
+  --be-ink-muted: #767676;
+  --be-grid: #E5E5E5;
+  --be-baseline: #1A1A1A;
+  --be-halo: #FFFFFF;
+  --be-logo-top: #05718F;
+  --be-logo-left: #D34C4C;
+  --be-logo-right: #777777;
+  --be-logo-bottom: #EBB82F;
+  --be-logo-ink: #181818;
+}
+
+/* Dark: opt in with <html data-theme="dark">, or data-theme="auto" to follow the reader's system setting. */
+:root[data-theme="dark"] {
+  --be-con: #1C7A98;
+  --be-con-text: #368CAB;
+  --be-lab: #CF4545;
+  --be-lab-text: #DF5351;
+  --be-ldem: #FAA61A;
+  --be-ldem-text: #FAA61A;
+  --be-ref: #15B6C2;
+  --be-ref-text: #15B6C2;
+  --be-grn: #62B65A;
+  --be-grn-text: #62B65A;
+  --be-snp: #F1EC3C;
+  --be-snp-text: #F1EC3C;
+  --be-pc: #357D6A;
+  --be-pc-text: #478F7B;
+  --be-rst: #687376;
+  --be-rst-text: #7A8588;
+  --be-oth: #A9ACA8;
+  --be-oth-text: #A9ACA8;
+  --be-ind: #7E817D;
+  --be-ind-text: #9C9F9B;
+  --be-ukip: #9A5AA5;
+  --be-ukip-text: #B07ABA;
+  --be-alba: #3C82D0;
+  --be-alba-text: #5A96DA;
+  --be-dup: #C8553E;
+  --be-dup-text: #DC6A52;
+  --be-sf: #4A8178;
+  --be-sf-text: #5E948B;
+  --be-sdlp: #2AA82C;
+  --be-sdlp-text: #2AA82C;
+  --be-uup: #48A5EE;
+  --be-uup-text: #48A5EE;
+  --be-apni: #F6CB2F;
+  --be-apni-text: #F6CB2F;
+  --be-positive: #3274B5;
+  --be-positive-text: #4986C9;
+  --be-negative: #E07A1F;
+  --be-negative-text: #E07A1F;
+  --be-neutral: #7E817D;
+  --be-neutral-text: #A9ACA8;
+  --be-bg: #16181B;
+  --be-surface: #1F2226;
+  --be-border: #33373C;
+  --be-ink: #F2F2F2;
+  --be-ink-secondary: #B8BCC2;
+  --be-ink-muted: #8D939A;
+  --be-grid: #2C3035;
+  --be-baseline: #E6E6E6;
+  --be-halo: #16181B;
+  --be-logo-top: #2E95B8;
+  --be-logo-left: #E26060;
+  --be-logo-right: #A3A3A3;
+  --be-logo-bottom: #F0C03A;
+  --be-logo-ink: #F2F2F2;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
+  --be-con: #1C7A98;
+  --be-con-text: #368CAB;
+  --be-lab: #CF4545;
+  --be-lab-text: #DF5351;
+  --be-ldem: #FAA61A;
+  --be-ldem-text: #FAA61A;
+  --be-ref: #15B6C2;
+  --be-ref-text: #15B6C2;
+  --be-grn: #62B65A;
+  --be-grn-text: #62B65A;
+  --be-snp: #F1EC3C;
+  --be-snp-text: #F1EC3C;
+  --be-pc: #357D6A;
+  --be-pc-text: #478F7B;
+  --be-rst: #687376;
+  --be-rst-text: #7A8588;
+  --be-oth: #A9ACA8;
+  --be-oth-text: #A9ACA8;
+  --be-ind: #7E817D;
+  --be-ind-text: #9C9F9B;
+  --be-ukip: #9A5AA5;
+  --be-ukip-text: #B07ABA;
+  --be-alba: #3C82D0;
+  --be-alba-text: #5A96DA;
+  --be-dup: #C8553E;
+  --be-dup-text: #DC6A52;
+  --be-sf: #4A8178;
+  --be-sf-text: #5E948B;
+  --be-sdlp: #2AA82C;
+  --be-sdlp-text: #2AA82C;
+  --be-uup: #48A5EE;
+  --be-uup-text: #48A5EE;
+  --be-apni: #F6CB2F;
+  --be-apni-text: #F6CB2F;
+  --be-positive: #3274B5;
+  --be-positive-text: #4986C9;
+  --be-negative: #E07A1F;
+  --be-negative-text: #E07A1F;
+  --be-neutral: #7E817D;
+  --be-neutral-text: #A9ACA8;
+  --be-bg: #16181B;
+  --be-surface: #1F2226;
+  --be-border: #33373C;
+  --be-ink: #F2F2F2;
+  --be-ink-secondary: #B8BCC2;
+  --be-ink-muted: #8D939A;
+  --be-grid: #2C3035;
+  --be-baseline: #E6E6E6;
+  --be-halo: #16181B;
+  --be-logo-top: #2E95B8;
+  --be-logo-left: #E26060;
+  --be-logo-right: #A3A3A3;
+  --be-logo-bottom: #F0C03A;
+  --be-logo-ink: #F2F2F2;
+  }
+}
+
+/* Opt-in base styles: add class="be" to <body> (or any wrapper). */
+.be{font-family:var(--be-font);font-size:var(--be-size-body);line-height:var(--be-lh-body);color:var(--be-ink);background:var(--be-bg);font-variant-numeric:tabular-nums lining-nums}
+.be h1,.be h2,.be h3{font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight);margin:0 0 .5em}
+.be h1{font-size:var(--be-size-h1)}.be h2{font-size:var(--be-size-h2)}
+.be .be-display{font-size:var(--be-size-display);font-weight:var(--be-weight-bold);line-height:var(--be-lh-tight)}
+.be small,.be .be-small{font-size:var(--be-size-small)}
+.be .be-caption{font-size:var(--be-size-caption);color:var(--be-ink-muted)}
+.be .be-muted{color:var(--be-ink-secondary)}
+
+.be-c-con{color:var(--be-con-text)}
+.be-bg-con{background-color:var(--be-con)}
+.be-c-lab{color:var(--be-lab-text)}
+.be-bg-lab{background-color:var(--be-lab)}
+.be-c-ldem{color:var(--be-ldem-text)}
+.be-bg-ldem{background-color:var(--be-ldem)}
+.be-c-ref{color:var(--be-ref-text)}
+.be-bg-ref{background-color:var(--be-ref)}
+.be-c-grn{color:var(--be-grn-text)}
+.be-bg-grn{background-color:var(--be-grn)}
+.be-c-snp{color:var(--be-snp-text)}
+.be-bg-snp{background-color:var(--be-snp)}
+.be-c-pc{color:var(--be-pc-text)}
+.be-bg-pc{background-color:var(--be-pc)}
+.be-c-rst{color:var(--be-rst-text)}
+.be-bg-rst{background-color:var(--be-rst)}
+.be-c-oth{color:var(--be-oth-text)}
+.be-bg-oth{background-color:var(--be-oth)}
+.be-c-ind{color:var(--be-ind-text)}
+.be-bg-ind{background-color:var(--be-ind)}
+.be-c-ukip{color:var(--be-ukip-text)}
+.be-bg-ukip{background-color:var(--be-ukip)}
+.be-c-alba{color:var(--be-alba-text)}
+.be-bg-alba{background-color:var(--be-alba)}
+.be-c-dup{color:var(--be-dup-text)}
+.be-bg-dup{background-color:var(--be-dup)}
+.be-c-sf{color:var(--be-sf-text)}
+.be-bg-sf{background-color:var(--be-sf)}
+.be-c-sdlp{color:var(--be-sdlp-text)}
+.be-bg-sdlp{background-color:var(--be-sdlp)}
+.be-c-uup{color:var(--be-uup-text)}
+.be-bg-uup{background-color:var(--be-uup)}
+.be-c-apni{color:var(--be-apni-text)}
+.be-bg-apni{background-color:var(--be-apni)}
+.be-c-positive{color:var(--be-positive-text)}
+.be-bg-positive{background-color:var(--be-positive)}
+.be-c-negative{color:var(--be-negative-text)}
+.be-bg-negative{background-color:var(--be-negative)}
+.be-c-neutral{color:var(--be-neutral-text)}
+.be-bg-neutral{background-color:var(--be-neutral)}
