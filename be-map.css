@@ -246,3 +246,19 @@
   padding: 0.3125rem 0.625rem;
 }
 #drawer #drawer-toggle:hover { background: #F5F5F5; }
+
+/* =====================================================================
+   PANEL TOOLS — magnifier (zoom to the area) and close, added by BE.basemap.panelTools().
+   Shown once a ward or seat is clicked (the panel gets .bm-pinned).
+   ===================================================================== */
+#side-panel .bm-panel-tools { position: absolute; top: 0.6rem; right: 0.5rem; display: flex; gap: 0.25rem; z-index: 2; }
+#side-panel:not(.bm-pinned) .bm-panel-tools { display: none; }
+#side-panel.bm-pinned #panel-inner > :is(.result-bar, .panel-header:first-child) { padding-right: 4.25rem; }
+#drawer .bm-drawer-tools { display: flex; gap: 0.25rem; }
+.bm-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; width: 1.625rem; height: 1.625rem; padding: 0;
+  font: 400 1rem/1 var(--be-font); color: var(--be-ink, #1A1A1A); background: #FFFFFF;
+  border: 1px solid var(--bm-head-rule); border-radius: var(--be-radius, 5px); cursor: pointer;
+}
+.bm-icon-btn:hover { background: #F5F5F5; }
+.bm-icon-btn:focus-visible { outline: 2px solid var(--be-con-text, #05718F); outline-offset: 1px; }
