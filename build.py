@@ -179,6 +179,51 @@ JS_RUNTIME = r"""
       if (t && prev !== null && prev !== undefined) t.innerHTML = BE.resultLine(win, prev, names);
     }
   };
+  /* Vote-share bins: one set of ranges for every party and project (tokens.share). */
+  function mix(hex, t) {
+    var a = String(hex).replace('#', ''), b = T.share.blendWith.replace('#', '');
+    var ch = function (h, i) { return parseInt(h.slice(i, i + 2), 16); };
+    var out = [0, 2, 4].map(function (i) { return Math.round(ch(b, i) + (ch(a, i) - ch(b, i)) * t); });
+    return 'rgb(' + out.join(',') + ')';
+  }
+  /** Bin edges in %: [10, 20, 30, 40, 50, 60] */
+  BE.shareBreaks = T.share.breaks.slice();
+  /** Which bin a share (in %) falls in: 0 = under the first break. */
+  BE.shareBin = function (pct) {
+    var i = 0;
+    while (i < T.share.breaks.length && pct >= T.share.breaks[i]) i++;
+    return i;
+  };
+  /** One colour per bin for a party (or a hex), lightest first. */
+  BE.shareColours = function (k, opt) {
+    var hex = (k && k.charAt && k.charAt(0) === '#') ? k : (BE.fill(k, opt) || '#A9ACA8');
+    return T.share.tints.map(function (t) { return mix(hex, t); });
+  };
+  /** Colour for one share (in %). */
+  BE.shareColour = function (k, pct, opt) { return BE.shareColours(k, opt)[BE.shareBin(pct || 0)]; };
+  /** MapLibre stepped expression over a numeric share (in %): BE.shareStep('lab', ['get', 'lab_pct']) */
+  BE.shareStep = function (k, valueExpr, opt) {
+    var c = BE.shareColours(k, opt), e = ['step', valueExpr, c[0]];
+    T.share.breaks.forEach(function (b, i) { e.push(b, c[i + 1]); });
+    return e;
+  };
+  /** Legend labels, one per bin: ['<10%', '10–20%', ... '60%+'] */
+  BE.shareLabels = function () {
+    var b = T.share.breaks, out = ['<' + b[0] + '%'];
+    for (var i = 1; i < b.length; i++) out.push(b[i - 1] + '–' + b[i] + '%');
+    out.push(b[b.length - 1] + '%+');
+    return out;
+  };
+  /** Fills a legend element with the binned key for a party: seven swatches, break values beneath. */
+  BE.shareLegend = function (el, k, opt) {
+    if (!el) return;
+    var c = BE.shareColours(k, opt), b = T.share.breaks;
+    el.classList.add('be-share-legend');
+    el.innerHTML = c.map(function (col, i) {
+      var tick = i ? '<b>' + b[i - 1] + (i === b.length ? '%' : '') + '</b>' : '';
+      return '<span class="be-share-bin"><i style="background:' + col + '"></i>' + tick + '</span>';
+    }).join('');
+  };
   BE.color = BE.fill; BE.colors = BE.colours;
 
   if (typeof module !== 'undefined' && module.exports) module.exports = BE;

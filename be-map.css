@@ -79,7 +79,8 @@
 :is(#side-panel, #drawer) .bar-track { overflow: hidden; }
 :is(#side-panel, #drawer) .bar-fill { height: 100%; }
 :is(#side-panel, #drawer) :is(.results-table, .history-table) :is(th, td) { border-bottom: 0; }
-:is(#side-panel, #drawer) .history-table-scroll { overflow-x: auto; }
+/* Room under the last row so an overlay scrollbar (macOS, mobile) never draws over the figures */
+:is(#side-panel, #drawer) .history-table-scroll { overflow-x: auto; padding-bottom: 0.75rem; scrollbar-width: thin; }
 :is(#side-panel, #drawer) .history-table tbody td { text-align: right; white-space: nowrap; }
 :is(#side-panel, #drawer) .history-table :is(th, td):first-child { text-align: left; position: sticky; left: 0; background: #fff; z-index: 1; }
 :is(#side-panel, #drawer) .history-table thead th { text-align: right; white-space: nowrap; }
@@ -262,3 +263,11 @@
 }
 .bm-icon-btn:hover { background: #F5F5F5; }
 .bm-icon-btn:focus-visible { outline: 2px solid var(--be-con-text, #05718F); outline-offset: 1px; }
+
+/* =========================================================
+   VOTE-SHARE LEGEND (BE.shareLegend): seven stepped bins, break values beneath
+   ========================================================= */
+.be-share-legend { display: grid; grid-template-columns: repeat(7, 1fr); width: 100%; min-width: 9.5rem; padding-bottom: 0.9rem; }
+.be-share-bin { position: relative; display: block; }
+.be-share-bin i { display: block; height: 0.625rem; border-radius: 0; }
+.be-share-bin b { position: absolute; left: 0; top: 0.75rem; transform: translateX(-50%); font: 400 0.625rem/1 var(--be-font-figures, 'Roboto Mono', monospace); color: #666; white-space: nowrap; }
