@@ -48,7 +48,9 @@
       var l = {
         id: id, type: 'symbol', source: 'basemap', 'source-layer': 'place',
         filter: ['in', ['get', 'class'], ['literal', classes]],
-        layout: { 'text-field': ['get', 'name'], 'text-font': font, 'text-size': size, 'text-anchor': 'center', 'text-max-width': 8 },
+        // name:latin: a Latin-script name for places whose local name isn't (the
+        // house glyphs only carry Latin; other ranges are empty placeholders)
+        layout: { 'text-field': ['coalesce', ['get', 'name:latin'], ['get', 'name']], 'text-font': font, 'text-size': size, 'text-anchor': 'center', 'text-max-width': 8 },
         paint: { 'text-color': 'hsl(0,0%,25%)', 'text-halo-color': 'hsla(0,0%,100%,0.85)', 'text-halo-width': 2 },
       };
       if (minzoom) l.minzoom = minzoom;
