@@ -34,3 +34,15 @@ Pages are light by default. `<html data-theme="dark">` switches to the dark-back
 ## Logo
 
 `logo/mark.svg` (light backgrounds), `logo/mark-dark.svg` (dark/broadcast), `logo/mark-mono-black.svg`, `logo/mark-mono-white.svg`. Logo colours are fixed brand colours, deliberately separate from the party palette.
+
+Wordmark and badge (text outlined, set in Archivo):
+
+| File | Use |
+|---|---|
+| `logo/wordmark.svg` | Default. White cross in a black square, black name. Light backgrounds. |
+| `logo/wordmark-dark.svg` | Colour cross in a white square, white name. Dark backgrounds and broadcast. |
+| `logo/wordmark-mono-black.svg` / `-mono-white.svg` | One colour, plain cross. |
+| `logo/badge.svg` / `badge-dark.svg` | Stacked badge for square spaces and the corner of a stream. |
+| `logo/icon.svg` / `icon-colour.svg` | The square alone: favicons and avatars. |
+
+Each wordmark and badge also has a `-ben-walker` version for broadcast and the Substack, and every file has a transparent PNG in `logo/png/`. The colour cross only appears inside a white square or on its own; never small in a black square. `tools/make_logos.py` rebuilds the SVGs (needs static Archivo instances and Playwright's Chromium).
