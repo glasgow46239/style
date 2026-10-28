@@ -47,6 +47,9 @@ pre { background: var(--g-code); padding: 14px 16px; margin: 0; overflow-x: auto
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 20px; }
 .tile { border: 1px solid var(--g-rule); padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .tile img { width: 72px; height: 72px; }
+.tile img.wm { width: auto; height: 40px; max-width: 100%; }
+.tile img.wm.tall { height: 64px; }
+.grid.wide { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 .tile small { color: var(--be-ink-secondary); }
 .chart { border: 1px solid var(--g-rule); padding: 12px 8px 4px; margin: 0 0 20px; }
 .chart svg { display: block; width: 100%; height: auto; }
@@ -233,7 +236,34 @@ BE.setResult(panel, 'grn', null);                                    // history 
 
 <section id="logo">
   <h2>Logo</h2>
-  <p class="lede">The ballot cross is the white space between the four chevrons. The logo colours are fixed brand colours and are deliberately not linked to the party palette, so data colours can change without changing the logo.</p>
+  <p class="lede">The ballot cross is the white space between the four chevrons. The name is set in capitals in Archivo: condensed ExtraBold for BRITAIN ELECTS; for "with Ben Walker", regular-width Light for WITH and expanded ExtraBold for BEN WALKER. Every file has its text converted to outlines, so it looks the same everywhere without the font installed.</p>
+
+  <h3>Wordmark</h3>
+  <p>The everyday logo: site headers, Substack, article graphics, anywhere with width.</p>
+  <div class="grid wide">
+    <div class="tile on-light"><img class="wm" src="logo/wordmark.svg" alt="Britain Elects wordmark, white cross in a black square"><small style="color:#555">wordmark.svg · light backgrounds, the default</small></div>
+    <div class="tile on-dark"><img class="wm" src="logo/wordmark-dark.svg" alt="Britain Elects wordmark, colour cross in a white square"><small style="color:#B8BCC2">wordmark-dark.svg · dark backgrounds and broadcast</small></div>
+    <div class="tile on-light"><img class="wm" src="logo/wordmark-mono-black.svg" alt="Britain Elects wordmark, black"><small style="color:#555">wordmark-mono-black.svg · one colour</small></div>
+    <div class="tile on-dark"><img class="wm" src="logo/wordmark-mono-white.svg" alt="Britain Elects wordmark, white"><small style="color:#B8BCC2">wordmark-mono-white.svg · one colour, reversed; fades over footage</small></div>
+    <div class="tile on-light"><img class="wm tall" src="logo/wordmark-ben-walker.svg" alt="Britain Elects with Ben Walker"><small style="color:#555">wordmark-ben-walker.svg</small></div>
+    <div class="tile on-dark"><img class="wm tall" src="logo/wordmark-dark-ben-walker.svg" alt="Britain Elects with Ben Walker, dark"><small style="color:#B8BCC2">wordmark-dark-ben-walker.svg</small></div>
+    <div class="tile on-light"><img class="wm tall" src="logo/wordmark-mono-black-ben-walker.svg" alt="Britain Elects with Ben Walker, black"><small style="color:#555">wordmark-mono-black-ben-walker.svg</small></div>
+    <div class="tile on-dark"><img class="wm tall" src="logo/wordmark-mono-white-ben-walker.svg" alt="Britain Elects with Ben Walker, white"><small style="color:#B8BCC2">wordmark-mono-white-ben-walker.svg</small></div>
+  </div>
+
+  <h3>Badge and icon</h3>
+  <p>The compact logo: avatars, the corner of a stream, square spaces.</p>
+  <div class="grid wide">
+    <div class="tile on-light"><img class="wm tall" src="logo/badge.svg" alt="Britain Elects badge"><small style="color:#555">badge.svg</small></div>
+    <div class="tile on-dark"><img class="wm tall" src="logo/badge-dark.svg" alt="Britain Elects badge, dark"><small style="color:#B8BCC2">badge-dark.svg</small></div>
+    <div class="tile on-light"><img class="wm tall" src="logo/badge-ben-walker.svg" alt="Britain Elects with Ben Walker badge"><small style="color:#555">badge-ben-walker.svg</small></div>
+    <div class="tile on-dark"><img class="wm tall" src="logo/badge-dark-ben-walker.svg" alt="Britain Elects with Ben Walker badge, dark"><small style="color:#B8BCC2">badge-dark-ben-walker.svg</small></div>
+    <div class="tile on-light"><img src="logo/icon.svg" alt="Britain Elects icon"><small style="color:#555">icon.svg · favicons, avatars</small></div>
+    <div class="tile on-dark"><img src="logo/icon-colour.svg" alt="Britain Elects icon, colour"><small style="color:#B8BCC2">icon-colour.svg · avatars, the colour icon</small></div>
+  </div>
+  <p>Every file also comes as a transparent PNG in <code>logo/png/</code> (2400px wide; icons 1024px) for OBS and tools that won't take SVG.</p>
+
+  <h3>Mark</h3>
   <div class="grid">
     <div class="tile on-light"><img src="logo/mark.svg" alt="Britain Elects mark, colour"><small style="color:#555">mark.svg · light backgrounds</small></div>
     <div class="tile on-dark"><img src="logo/mark-dark.svg" alt="Britain Elects mark, dark-background colours"><small style="color:#B8BCC2">mark-dark.svg · dark backgrounds and broadcast</small></div>
@@ -241,6 +271,9 @@ BE.setResult(panel, 'grn', null);                                    // history 
     <div class="tile on-dark"><img src="logo/mark-mono-white.svg" alt="Britain Elects mark, white"><small style="color:#B8BCC2">mark-mono-white.svg · one colour, reversed</small></div>
   </div>
   <ul class="rules">
+    <li>The colour cross never sits small beside the name on a light background: the party-strength colours can't compete with the black capitals. Next to the name it is either a white cross in a black square (light backgrounds) or a colour cross in a white square (dark backgrounds).</li>
+    <li>Use the colour cross on its own where it has room: a white-square icon, stream intros, cover pages, a sign-off at the end of an article.</li>
+    <li>Don't put the colour cross in a black square: the blue arm sinks into it.</li>
     <li>Keep clear space of at least one chevron arm's width on every side.</li>
     <li>Minimum size 16px for the mark alone, 120px wide for the full lockup.</li>
     <li>Use the dark version on any background darker than mid grey. Don't put the light version on dark.</li>
